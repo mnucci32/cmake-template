@@ -12,7 +12,7 @@ message(STATUS "PDFLATEX_COMPILER: ${PDFLATEX_COMPILER}")
 message(STATUS "BIBTEX_COMPILER: ${BIBTEX_COMPILER}")
 
 # specify the name of the main .tex file
-set(MAIN_TEX_FILE "user_guide.tex")
+set(MAIN_TEX_FILE "user_guide")
 
 # define LaTeX source files
 set(LATEX_SOURCES ${MAIN_TEX_FILE}.tex references.bib)
