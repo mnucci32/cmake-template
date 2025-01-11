@@ -1,32 +1,15 @@
-# Prerequisites
-*.d
+# ignore temporary files
+*~
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# ignore vscode files
+.vscode*
 
-# Precompiled Headers
-*.gch
-*.pch
+# ignore texlive files
+user_guide/*.aux
+user_guide/*.bbl
+user_guide/*.blg
+user_guide/*.log
+user_guide/*.pdf
+user_guide/*.gz
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
 
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app

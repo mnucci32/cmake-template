@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# find all staged C++ files
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=d | grep -E '\.(cpp|hpp)$')
+
+# exit early if no relevant files are staged
+if [ -z "$STAGED_FILES" ]; then
+  echo "No staged C++ files to check - skipping clang-format check"
+  exit 0
+fi
+
+# format each staged file with clang-format and re-add to staging area
+for file in $STAGED_FILES; do
+  clang-format -i $file
+  git add $file
+done
+
+echo "Code formatted using clang-format"
