@@ -74,10 +74,11 @@ if(EIGEN_DIR)  # user provided Eigen
   else()
     list(PREPEND CMAKE_PREFIX_PATH ${EIGEN_DIR})
   endif()
-  message(STATUS "Looking for Eign here: " ${CMAKE_PREFIX_PATH})
+  message(STATUS "Looking for Eigen here: " ${CMAKE_PREFIX_PATH})
   find_package(Eigen3 3.4.0 REQUIRED NO_MODULE)
   set(eigen_SOURCE_DIR ${EIGEN_DIR})
 else()  # download Eigen
+  message(STATUS "Downloading Eigen")
   FetchContent_Declare(
     eigen
     GIT_REPOSITORY https://gitlab.com/libeigen/eigen.git
@@ -99,6 +100,7 @@ if(YAML_CPP_DIR)  # user provided YAML-cpp
   message(STATUS "Looking for YAML-cpp here: " ${CMAKE_PREFIX_PATH})
   find_package(yaml-cpp 0.8.0 REQUIRED)
 else()  # download YAML-cpp
+  message(STATUS "Downloading YAML-cpp")
   FetchContent_Declare(
     yaml-cpp
     GIT_REPOSITORY https://github.com/jbeder/yaml-cpp.git
@@ -146,7 +148,7 @@ install(FILES "${PROJECT_BINARY_DIR}/hello_version.hpp" DESTINATION include)
 
 # export targets for use by other projects
 install(EXPORT hello_targets
-  FILE hello_targets
+  FILE hello_targets.cmake
   NAMESPACE hello::
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/hello
 )
@@ -155,21 +157,21 @@ install(EXPORT hello_targets
 include(CMakePackageConfigHelpers)
 
 write_basic_package_version_file(
-  ${PROJECT_BINARY_DIR}/helloConfigVersion.cmake
+  ${PROJECT_BINARY_DIR}/hello_config_version.cmake
   VERSION ${hello_VERSION_MAJOR}.${hello_VERSION_MINOR}.${hello_VERSION_PATCH}
   COMPATIBILITY SameMajorVersion
 )
 
 # configure the config.cmake file
 configure_package_config_file(
-  "${CMAKE_SOURCE_DIR}/cmake/helloConfig.cmake.in"
-  "${PROJECT_BINARY_DIR}/helloConfig.cmake"
+  "${CMAKE_SOURCE_DIR}/cmake/hello_config.cmake.in"
+  "${PROJECT_BINARY_DIR}/hello_config.cmake"
   INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/hello
 )
 
 # install configuration and version files
 install(FILES 
-  "${PROJECT_BINARY_DIR}/helloConfig.cmake"
-  "${PROJECT_BINARY_DIR}/helloConfigVersion.cmake"
+  "${PROJECT_BINARY_DIR}/hello_config.cmake"
+  "${PROJECT_BINARY_DIR}/hello_config_version.cmake"
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/hello
 )

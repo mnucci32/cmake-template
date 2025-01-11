@@ -37,4 +37,4 @@ endif()
 
 
 target_link_libraries(hello_test gtest gtest_main hello_static)
-gteste_discover_tests(hello_test PROPERTIES LABELS) "hello")
+gtest_discover_tests(hello_test PROPERTIES LABELS "hello")

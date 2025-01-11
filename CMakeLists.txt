@@ -17,9 +17,6 @@ endif()
 
 # we not just building docs build code
 if (NOT BUILD_DOCS_ONLY)
-  # export compiler commands for clang-tidy
-  set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-  
   # add subdirectories
   add_subdirectory(src)
   add_subdirectory(unit_tests)
@@ -45,5 +42,7 @@ if (NOT BUILD_DOCS_ONLY)
     message(STATUS "C++ flags: " ${CMAKE_CXX_FLAGS})
   endif()
 
-
+  # export compiler commands for clang-tidy
+  set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+  
 endif()

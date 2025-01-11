@@ -3,7 +3,7 @@
 
 #include <gtest/gtest.h>
 #include <yaml-cpp/yaml.h>
-#include <eigen3/Dense>
+#include <Eigen/Dense>
 
 #include "hello.hpp"
 
@@ -18,7 +18,7 @@ class helloTest : public ::testing::Test {
     _h = hello::hello();
   } 
 
-}
+};
 
 
 #endif
