@@ -32,7 +32,7 @@ class hello {
   // function to get the vector
   [[nodiscard]] const Eigen::Vector3d &get_vector() const { return _v; }
   // function to get the message from the YAML node
-  [[nodiscard]] const std::string get_message() const {
+  [[nodiscard]] std::string get_message() const {
     return _node["message"].as<std::string>();
   }
 };

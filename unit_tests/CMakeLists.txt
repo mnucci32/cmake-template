@@ -1,4 +1,5 @@
 # get google test
+message(STATUS "Downloading Google Test")
 include(FetchContent)
 FetchContent_Declare(
   googletest

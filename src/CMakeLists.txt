@@ -123,7 +123,20 @@ else()  # download YAML-cpp
 endif()
 
 # ---------------------------------------- KOKKOS --------------------------------------
+# add the provide path to CMAKE_PREFIX_PATH so that find_package can locate it
+# prepend if it is already defined
+if(NOT DEFINED CMAKE_PREFIX_PATH)
+  set(CMAKE_PREFIX_PATH ${KOKKOS_DIR} CACHE STRING "Path to custom modules or packages")
+else()
+  list(PREPEND CMAKE_PREFIX_PATH ${KOKKOS_DIR})
+endif()
+message(STATUS "Looking for Kokkos here: " ${CMAKE_PREFIX_PATH})
+find_package(Kokkos 4.5.01 REQUIRED)
 
+# link to kokkos
+target_link_libraries(hello Kokkos::kokkos)
+target_link_libraries(hello_shared Kokkos::kokkos)
+target_link_libraries(hello_static Kokkos::kokkos)
 
 # link to yaml-cpp
 target_link_libraries(hello yaml-cpp)
@@ -154,6 +167,7 @@ install(EXPORT hello_targets
 )
 
 # generate config file for find_package
+message(STATUS "Configuring package config files")
 include(CMakePackageConfigHelpers)
 
 write_basic_package_version_file(
