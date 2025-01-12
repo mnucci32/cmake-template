@@ -45,4 +45,6 @@ if (NOT BUILD_DOCS_ONLY)
   # export compiler commands for clang-tidy
   set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
   
+  message(STATUS "CMAKE_CXX_COMPILER: " ${CMAKE_CXX_COMPILER})
+
 endif()

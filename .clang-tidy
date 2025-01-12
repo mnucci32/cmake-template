@@ -1,0 +1,90 @@
+# Description: clang-tidy configuration file
+# Checks described in more detail here: https://clang.llvm.org/extra/clang-tidy/checks/list.html
+Checks: >
+  bugprone-*,
+  cppcoreguidelines-*,
+  google-*,
+  hicpp-*,
+  misc-*,
+  modernize-*,
+  performance-*,
+  portability-*,
+  readability-identifier-naming,
+  readability-avoid-*
+  readability-const-return-type,
+  readability-container-*,
+  readability-delete-null-pointer,
+  readability-duplicate-include,
+  readability-enum-initial-value,
+  readability-implicit-bool-conversion,
+  readability-inconsistent-declaration-parameter-name,
+  readability-isolate-declaration,
+  readability-make-member-function-const,
+  readability-math-missing-parentheses,
+  readability-misleading-indentation,
+  readability-misplaced-array-index,
+  readability-named-parameter,
+  readability-non-const-parameter,
+  readability-operators-representation,
+  readability-qualified-auto,
+  readability-redundant-*,
+  readability-reference-to-constructed-temporary,
+  readability-simplify-*
+  readability-static-*,
+  readability-string-compare,
+  readability-suspicous-call-argument,
+  readabiiity-uniqueptr-delete-release,
+  readability-uppercase-literal-suffix,
+  readability-use-anyofallof,
+  -modernize-use-trailing-return-type,
+  -bugprone-easily-swappable-parameters,
+  -bugprone-narrowing-conversions,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-narrowing-conversions,
+  -misc-include-cleaner,
+  -performance-avoid-endl,
+  -performance-enum-size,
+  -portability-simd-intrinsics
+
+FormatStyle: file
+
+# define naming style rules 
+CheckOptions:
+  - key: readability-identifier-naming.MemberVariableCase
+    value: lower_case
+  - key: readability-identifier-naming.MemberVariablePrefix
+    value: "_"
+  - key: readability-identifier-naming.MethodCase
+    value: lower_case
+  # ignore member functions of the form dXX_dXX for derivatives
+  - key: readability-identifier-naming.MethodIgnoredRegexp
+    value: "^d.*_d.*$|^R$"
+  - key: readability-identifier-naming.ClassCase
+    value: camelBack
+  - key: readability-identifier-naming.FunctionCase
+    value: CamelCase
+  - key: readability-identifier-naming.EnumCase
+    value: lower_case
+  - key: readability-identifier-naming.EnumConstantCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.ConstexprVariableCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.MacroDefinitionCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.IgnoreMain
+    value: 1
+  - key: readability-identifier-naming.NamespaceCase
+    value: lower_case
+  - key: readability-identifier-naming.TypedefCase
+    value: CamelCase
+  - key: readability-identifier-naming.TypeAliasCase
+    value: CamelCase
+  # allow only using std::cout, std::cerr, std::endl 
+  - key: readability-identifier-naming.AllowedUsingDeclarations
+    value: "^(std::(cout|cerr|endl))$"
+  - key: readability-operators-representation.BinaryOperators
+    value: "&&;&=;&;|;~;!;!=;||;|=;^;^="
+
+# treat all warnings as errors
+WarningsAsErrors: "*"
+

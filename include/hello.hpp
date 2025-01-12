@@ -1,9 +1,10 @@
 #ifndef HELLO_HEADERDEF
 #define HELLO_HEADERDEF
 
-#include <ostream>
-#include <Eigen/Dense>
 #include <yaml-cpp/yaml.h>
+
+#include <Eigen/Dense>
+#include <ostream>
 
 namespace hello {
 
@@ -15,9 +16,13 @@ class hello {
 
  public:
   // constructor
-  hello() : _v(1,2,3) {
-    _node = YAML::Load("message: Hello World!");
-  }
+  hello() : _v(1, 2, 3) { _node = YAML::Load("message: Hello World!"); }
+  // copy constructor
+  hello(const hello &h) = default;
+  hello &operator=(const hello &h) = default;
+  // move constructor
+  hello(hello &&h) = default;
+  hello &operator=(hello &&h) = default;
   // destructor
   ~hello() = default;
   // function to print "Hello World!" to the console
@@ -25,11 +30,9 @@ class hello {
     os << "Hello World!" << std::endl;
   }
   // function to get the vector
-  const Eigen::Vector3d &get_vector() const {
-    return _v;
-  } 
+  [[nodiscard]] const Eigen::Vector3d &get_vector() const { return _v; }
   // function to get the message from the YAML node
-  const std::string get_message() const {
+  [[nodiscard]] const std::string get_message() const {
     return _node["message"].as<std::string>();
   }
 };

@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# check C++ files for formatting with clang-format
+echo "Checking code formatting with clang-format..."
+files=$(find . -name "*.cpp" -o -name "*.hpp")
+echo $files
+clang-format --dry-run --Werror $files
+if [ $? -ne 0 ]; then
+  echo "Code formatting check failed! Please run clang-format on your code."
+  exit 1
+fi
+
+# check static analysis of code with clang-tidy
+echo "Checking code with clang-tidy..."
+clang-tidy --version
+# list checks in clang-tidy configuration file
+clang-tidy --list-checks
+# get all source code files and run default checks
+src_files=$(find include src \( -type f -name "*.cpp" -or -name "*.hpp" \))
+echo $src_files
+clang-tidy -p=. --extra-arg=-std=c++17 $src_files
+result=$?
+if [ $result -ne 0 ]; then
+  echo "clang-tidy static analysis failed on source code!"
+  exit 1
+fi
+
+# get all test code fiels and run subset of checks
+test_files=$(find unit_tests \( -type f -name "*.cpp" -or -name "*.hpp" \))
+echo $test_files
+clang-tidy -p=. --extra-arg=-std=c++17 $test_files
+result=$?
+if [ $result -ne 0 ]; then
+  echo "clang-tidy static analysis failed on test code!"
+  exit 1
+fi
+
+echo "All checks passed!"
+exit 0

@@ -12,4 +12,5 @@ user_guide/*.log
 user_guide/*.pdf
 user_guide/*.gz
 
-
+# ignore build files for clang-tidy
+compile_commands.json

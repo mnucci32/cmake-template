@@ -3,6 +3,7 @@
 
 #include <gtest/gtest.h>
 #include <yaml-cpp/yaml.h>
+
 #include <Eigen/Dense>
 
 #include "hello.hpp"
@@ -16,9 +17,7 @@ class helloTest : public ::testing::Test {
   void SetUp() override {
     // code here will execute just before the test ensues
     _h = hello::hello();
-  } 
-
+  }
 };
-
 
 #endif

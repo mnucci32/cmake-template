@@ -1,0 +1,10 @@
+# Inherits from parent directory and removes checks not needed for gtest
+Checks: >
+  -cppcoreguidelines-non-private-member-variables-in-classes,
+  -misc-non-private-member-variables-in-classes
+
+InheritParentConfig: true
+
+CheckOptions:
+  - key: readability-identifier-naming.MethodCase
+    value: CamelCase  # match gtest style for virtual/overrides
